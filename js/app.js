@@ -1,26 +1,9 @@
-const tg = window.Telegram.WebApp;
+document.addEventListener("DOMContentLoaded", init);
 
-tg.ready();
-tg.expand();
+async function init(){
 
-const user = tg.initDataUnsafe.user;
+    initTelegram();
 
-const welcome = document.getElementById("welcome");
+    await loadSpecialists();
 
-if(user){
-    welcome.innerHTML = `Welcome, ${user.first_name} 👋`;
-}else{
-    welcome.innerHTML = "Welcome to OEDXBOT";
 }
-
-document.querySelectorAll(".card").forEach(card=>{
-
-    card.onclick=()=>{
-
-        const ai=card.dataset.ai;
-
-        alert("Opening "+ai.toUpperCase()+" AI...");
-
-    };
-
-});

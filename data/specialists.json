@@ -1,0 +1,50 @@
+[
+  {
+    "id": "coding",
+    "name": "Coding AI",
+    "icon": "💻",
+    "description": "Programming, debugging and software development."
+  },
+  {
+    "id": "tools",
+    "name": "Tools AI",
+    "icon": "🛠️",
+    "description": "Developer tools, CLI utilities and productivity software."
+  },
+  {
+    "id": "cyber",
+    "name": "Cyber AI",
+    "icon": "🔐",
+    "description": "Cybersecurity education and defensive practices."
+  },
+  {
+    "id": "web",
+    "name": "Web AI",
+    "icon": "🌐",
+    "description": "HTML, CSS, JavaScript, React and backend development."
+  },
+  {
+    "id": "mobile",
+    "name": "Mobile AI",
+    "icon": "📱",
+    "description": "Android, Flutter and React Native."
+  },
+  {
+    "id": "python",
+    "name": "Python AI",
+    "icon": "🐍",
+    "description": "Python scripting, automation and APIs."
+  },
+  {
+    "id": "devops",
+    "name": "DevOps AI",
+    "icon": "☁️",
+    "description": "Linux, Docker, CI/CD and cloud."
+  },
+  {
+    "id": "general",
+    "name": "General AI",
+    "icon": "🤖",
+    "description": "General questions and everyday assistance."
+  }
+]
