@@ -1,33 +1,26 @@
 const tg = window.Telegram.WebApp;
 
 tg.ready();
-
 tg.expand();
-
-const welcome = document.getElementById("welcome");
 
 const user = tg.initDataUnsafe.user;
 
+const welcome = document.getElementById("welcome");
+
 if(user){
-
-    welcome.innerHTML =
-    `Welcome, ${user.first_name}!`;
-
+    welcome.innerHTML = `Welcome, ${user.first_name} 👋`;
 }else{
-
-    welcome.innerHTML =
-    "Welcome to OEDXBOT";
-
+    welcome.innerHTML = "Welcome to OEDXBOT";
 }
 
 document.querySelectorAll(".card").forEach(card=>{
 
-    card.addEventListener("click",()=>{
+    card.onclick=()=>{
 
-        const ai = card.innerText.trim();
+        const ai=card.dataset.ai;
 
-        alert(ai + " will be connected in the next step.");
+        alert("Opening "+ai.toUpperCase()+" AI...");
 
-    });
+    };
 
 });

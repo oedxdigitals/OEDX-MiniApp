@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OEDXBOT</title>
 
-<link rel="stylesheet"
-href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -19,71 +14,69 @@ href="css/style.css">
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<header>
-
-<h1>🤖 OEDXBOT</h1>
-
-<p id="welcome">
-Loading...
-</p>
-
-</header>
-
-<div class="hero">
-
-<h2>Your AI Workspace</h2>
-
-<p>
-
-Choose an AI specialist below.
-
-</p>
-
+<div class="logo">
+🤖
 </div>
 
-<div class="grid">
+<h1>OEDXBOT</h1>
 
-<button class="card">
+<p id="welcome">Loading...</p>
+
+<div class="subtitle">
+Choose your AI Specialist
+</div>
+
+<div class="cards">
+
+<div class="card" data-ai="coding">
 💻
-<span>Coding AI</span>
-</button>
+<h3>Coding AI</h3>
+<p>Build, debug & explain code</p>
+</div>
 
-<button class="card">
-🛠
-<span>Tools AI</span>
-</button>
+<div class="card" data-ai="tools">
+🛠️
+<h3>Tools AI</h3>
+<p>Developer & security tools</p>
+</div>
 
-<button class="card">
+<div class="card" data-ai="cyber">
 🔐
-<span>Cyber AI</span>
-</button>
+<h3>Cyber AI</h3>
+<p>Ethical cybersecurity learning</p>
+</div>
 
-<button class="card">
+<div class="card" data-ai="web">
 🌐
-<span>Web AI</span>
-</button>
+<h3>Web AI</h3>
+<p>HTML, CSS, JS, React & more</p>
+</div>
 
-<button class="card">
+<div class="card" data-ai="mobile">
 📱
-<span>Mobile AI</span>
-</button>
+<h3>Mobile AI</h3>
+<p>Android, Flutter & React Native</p>
+</div>
 
-<button class="card">
+<div class="card" data-ai="python">
 🐍
-<span>Python AI</span>
-</button>
+<h3>Python AI</h3>
+<p>Automation & scripting</p>
+</div>
 
-<button class="card">
-☁
-<span>DevOps AI</span>
-</button>
+<div class="card" data-ai="devops">
+☁️
+<h3>DevOps AI</h3>
+<p>Linux, Docker & CI/CD</p>
+</div>
 
-<button class="card">
+<div class="card" data-ai="general">
 🤖
-<span>General AI</span>
-</button>
+<h3>General AI</h3>
+<p>Ask anything</p>
+</div>
 
 </div>
 
@@ -92,5 +85,4 @@ Choose an AI specialist below.
 <script src="js/app.js"></script>
 
 </body>
-
 </html>
