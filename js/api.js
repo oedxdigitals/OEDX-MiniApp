@@ -1,85 +1,125 @@
 const API_URL = "https://starring-qld-examination-responsibility.trycloudflare.com/chat/";
 
-async function loadSpecialists(){
+async function loadSpecialists() {
 
-    const response =
-    await fetch("data/specialists.json");
+    const response = await fetch("data/specialists.json");
 
-    const data =
-    await response.json();
+    const data = await response.json();
 
-    const cards =
-    document.getElementById("cards");
+    const cards = document.getElementById("cards");
 
-    cards.innerHTML="";
+    cards.innerHTML = "";
 
-    data.forEach(ai=>{
+    data.forEach(ai => {
 
-        cards.innerHTML +=`
+        cards.innerHTML += `
+        <div class="card" onclick="openAI('${ai.id}')">
 
-<div class="card"
+            <div class="icon">
+                ${ai.icon}
+            </div>
 
-onclick="openAI('${ai.id}')">
+            <h3>
+                ${ai.name}
+            </h3>
 
-<div class="icon">
+            <p>
+                ${ai.description}
+            </p>
 
-${ai.icon}
-
-</div>
-
-<h3>
-
-${ai.name}
-
-</h3>
-
-<p>
-
-${ai.description}
-
-</p>
-
-</div>
-
-`;
+        </div>
+        `;
 
     });
 
 }
 
-function sendMessage(){
+async function sendMessage() {
 
-    const input =
-    document.getElementById("prompt");
+    const input = document.getElementById("prompt");
 
-    const text =
-    input.value.trim();
+    const text = input.value.trim();
 
-    if(text==="") return;
+    if (!text) return;
 
-    const messages =
-    document.getElementById("messages");
+    const messages = document.getElementById("messages");
 
     messages.innerHTML += `
+        <div class="user">
+            ${text}
+        </div>
+    `;
 
-<div class="user">
+    input.value = "";
 
-${text}
+    const thinking = document.createElement("div");
+    thinking.className = "ai";
+    thinking.id = "thinking";
+    thinking.innerHTML = "Thinking...";
+    messages.appendChild(thinking);
 
-</div>
+    messages.scrollTop = messages.scrollHeight;
 
-`;
+    try {
 
-    messages.innerHTML += `
+        const response = await fetch(API_URL, {
 
-<div class="ai">
+            method: "POST",
 
-Thinking...
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-</div>
+            body: JSON.stringify({
 
-`;
+                specialist: currentAI,
 
-    input.value="";
+                message: text
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        thinking.remove();
+
+        messages.innerHTML += `
+            <div class="ai">
+                ${result.reply}
+            </div>
+        `;
+
+    } catch (error) {
+
+        thinking.remove();
+
+        messages.innerHTML += `
+            <div class="ai">
+                ❌ Unable to reach OEDXBOT backend.
+            </div>
+        `;
+
+        console.error(error);
+
+    }
+
+    messages.scrollTop = messages.scrollHeight;
 
 }
+
+document.addEventListener("keypress", function(e) {
+
+    if (e.key === "Enter") {
+
+        const input = document.getElementById("prompt");
+
+        if (document.activeElement === input) {
+
+            sendMessage();
+
+        }
+
+    }
+
+});
