@@ -1,4 +1,4 @@
-const API_URL = "https://rolls-devoted-articles-blake.trycloudflare.com"
+const API_URL = "https://oedxbot-backend-production.up.railway.app/chat/";
 async function loadSpecialists() {
 
     const response = await fetch("data/specialists.json");
