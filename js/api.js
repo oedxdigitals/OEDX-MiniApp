@@ -1,5 +1,4 @@
-const API_URL = "https://starring-qld-examination-responsibility.trycloudflare.com/chat/";
-
+const API_URL = "https://rolls-devoted-articles-blake.trycloudflare.com"
 async function loadSpecialists() {
 
     const response = await fetch("data/specialists.json");
