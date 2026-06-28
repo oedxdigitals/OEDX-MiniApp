@@ -44,3 +44,40 @@ ${ai.description}
     });
 
 }
+
+function sendMessage(){
+
+    const input =
+    document.getElementById("prompt");
+
+    const text =
+    input.value.trim();
+
+    if(text==="") return;
+
+    const messages =
+    document.getElementById("messages");
+
+    messages.innerHTML += `
+
+<div class="user">
+
+${text}
+
+</div>
+
+`;
+
+    messages.innerHTML += `
+
+<div class="ai">
+
+Thinking...
+
+</div>
+
+`;
+
+    input.value="";
+
+}

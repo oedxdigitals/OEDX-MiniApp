@@ -1,5 +1,9 @@
+let currentAI = null;
+
 function openAI(id){
 
-    alert(id + " AI Coming Soon");
+    currentAI = id;
+
+    showChat(id);
 
 }
