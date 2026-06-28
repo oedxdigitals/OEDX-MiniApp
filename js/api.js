@@ -1,3 +1,5 @@
+const API_URL = "https://starring-qld-examination-responsibility.trycloudflare.com/chat/";
+
 async function loadSpecialists(){
 
     const response =
