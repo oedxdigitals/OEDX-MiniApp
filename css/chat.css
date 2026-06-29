@@ -114,15 +114,17 @@ box-shadow:0 2px 8px rgba(0,0,0,.25);
 
 position:sticky;
 
-bottom:70px;
+bottom:0;
 
 display:flex;
 
 gap:10px;
 
-padding-top:15px;
+padding:15px 0;
 
 background:#0f172a;
+
+z-index:10;
 
 }
 
