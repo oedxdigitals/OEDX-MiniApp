@@ -144,7 +144,23 @@ margin-bottom:6px;
 
 .footer-logo{
 
-font-size:26px;
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.footer-logo img{
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+object-fit:cover;
 
 }
 
