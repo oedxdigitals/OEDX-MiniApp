@@ -75,3 +75,37 @@ repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 
 }
+
+/* ===========================
+   OEDXBOT v1.5 Footer
+=========================== */
+
+#footer{
+
+max-width:700px;
+
+margin:30px auto 0;
+
+padding:18px 20px;
+
+text-align:center;
+
+background:#111827;
+
+border-top:1px solid #334155;
+
+color:#94a3b8;
+
+font-size:14px;
+
+line-height:1.6;
+
+}
+
+#footer strong{
+
+color:#3b82f6;
+
+font-weight:700;
+
+}
