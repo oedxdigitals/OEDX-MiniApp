@@ -43,12 +43,15 @@ async function sendMessage() {
 
     const messages = document.getElementById("messages");
 
-    messages.innerHTML += `
-        <div class="user">
-            ${text}
-        </div>
-    `;
+	messages.innerHTML += `
 
+	<div class="ai markdown-body">
+
+	${marked.parse(reply)}
+
+	</div>
+
+	`;
     input.value = "";
 
     const thinking = document.createElement("div");
