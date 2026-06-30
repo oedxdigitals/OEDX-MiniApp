@@ -44,13 +44,9 @@ async function sendMessage() {
     const messages = document.getElementById("messages");
 
 	messages.innerHTML += `
-
-	<div class="ai markdown-body">
-
-	${marked.parse(reply)}
-
+	<div class="user">
+	${text}
 	</div>
-
 	`;
     input.value = "";
 
@@ -86,11 +82,11 @@ async function sendMessage() {
 
         thinking.remove();
 
-        messages.innerHTML += `
-            <div class="ai">
-                ${result.reply}
-            </div>
-        `;
+	messages.innerHTML += `
+	<div class="ai markdown-body">
+	${marked.parse(result.reply)}
+	</div>
+	`;
 
     } catch (error) {
 
