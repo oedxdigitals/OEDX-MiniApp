@@ -1,18 +1,31 @@
-function showChat(id){
-
+function showChat(ai){
     const app = document.getElementById("app");
 
     app.innerHTML = `
 
 <div class="chat-header">
 
-<button id="backBtn">
+<button id="backBtn" class="back-btn">
 
-← Back
+←
 
 </button>
 
-<h2>${id.toUpperCase()} AI</h2>
+<div class="chat-title">
+
+<span class="chat-icon">
+
+${ai.icon}
+
+</span>
+
+<span>
+
+${ai.name}
+
+</span>
+
+</div>
 
 </div>
 
@@ -22,8 +35,7 @@ function showChat(id){
 
 Hello 👋
 
-I'm your ${id.toUpperCase()} AI.
-
+I'm your ${ai.name}.
 Ask me anything.
 
 </div>

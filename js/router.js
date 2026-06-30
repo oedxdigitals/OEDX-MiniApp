@@ -1,9 +1,15 @@
 let currentAI = null;
+let currentAIData = null;
 
-function openAI(id){
+async function openAI(id){
 
     currentAI = id;
 
-    showChat(id);
+    const response = await fetch("data/specialists.json");
+    const data = await response.json();
+
+    currentAIData = data.find(ai => ai.id === id);
+
+    showChat(currentAIData);
 
 }
