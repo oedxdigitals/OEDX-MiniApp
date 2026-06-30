@@ -80,13 +80,20 @@ async function sendMessage() {
 
         const result = await response.json();
 
-        thinking.remove();
+	thinking.remove();
 
 	messages.innerHTML += `
 	<div class="ai markdown-body">
 	${marked.parse(result.reply)}
 	</div>
 	`;
+
+// Highlight all code blocks
+	document.querySelectorAll("pre code").forEach((block) => {
+	    hljs.highlightElement(block);
+	});
+// Scroll to latest message
+	messages.scrollTop = messages.scrollHeight;
 
     } catch (error) {
 
