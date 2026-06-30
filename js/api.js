@@ -43,11 +43,8 @@ async function sendMessage() {
 
     const messages = document.getElementById("messages");
 
-	messages.innerHTML += `
-	<div class="user">
-	${text}
-	</div>
-	`;
+	addUserMessage(text);
+
     input.value = "";
 
     const thinking = document.createElement("div");
@@ -82,16 +79,8 @@ async function sendMessage() {
 
 	thinking.remove();
 
-	messages.innerHTML += `
-	<div class="ai markdown-body">
-	${marked.parse(result.reply)}
-	</div>
-	`;
+	addAIMessage(result.reply);
 
-// Highlight all code blocks
-	document.querySelectorAll("pre code").forEach((block) => {
-	    hljs.highlightElement(block);
-	});
 // Scroll to latest message
 	messages.scrollTop = messages.scrollHeight;
 

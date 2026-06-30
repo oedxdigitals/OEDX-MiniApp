@@ -1,5 +1,6 @@
 let currentAI = null;
 let currentAIData = null;
+let chatHistory = [];
 
 async function openAI(id){
 
