@@ -27,7 +27,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-
 
 <body>
 
-<div id="app">
+<div id="layout">
+
+<aside id="sidebar">
+
+</aside>
+
+    <main id="app">
 
 <header id="header">
 
@@ -67,7 +73,38 @@ Choose an AI expert to begin chatting.
 
 </section>
 
+</main>
+
 </div>
+
+<nav id="bottomNav">
+
+    <button onclick="showPage('chats')">
+        💬
+        <span>Chats</span>
+    </button>
+
+    <button onclick="showPage('bots')">
+        🤖
+        <span>Bots</span>
+    </button>
+
+    <button onclick="showPage('create')">
+        ✨
+        <span>Create</span>
+    </button>
+
+    <button onclick="showPage('contact')">
+        📩
+        <span>Contact</span>
+    </button>
+
+    <button onclick="showPage('profile')">
+        👤
+        <span>Profile</span>
+    </button>
+
+</nav>
 
 <footer id="footer">
 
@@ -102,7 +139,14 @@ Choose an AI expert to begin chatting.
 <script src="js/telegram.js"></script>
 <script src="js/router.js"></script>
 <script src="js/chat.js"></script>
+<script src="js/storage.js"></script>
 <script src="js/api.js"></script>
+<script src="components/search.js"></script>
+<script src="components/sidebar.js"></script>
+<script src="components/topbar.js"></script>
+<script src="pages/bots.js"></script>
+<script src="pages/chats.js"></script>
+<script src="js/navigation.js"></script>
 <script src="js/app.js"></script>
 
 <!-- Highlight.js -->

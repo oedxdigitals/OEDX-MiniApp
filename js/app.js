@@ -1,9 +1,15 @@
-// OEDXBOT v1.0
+k// ==========================================
+// OEDXBOT v3.0
 // Main Application
+// ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
     init();
 });
+
+// ------------------------------------------
+// Initialize App
+// ------------------------------------------
 
 async function init() {
 
@@ -14,26 +20,82 @@ async function init() {
             initTelegram();
         }
 
-        // Load AI specialists
-        if (typeof loadSpecialists === "function") {
-            await loadSpecialists();
+        // Render Desktop Sidebar
+        renderSidebarComponent();
+
+        // Open default page
+        if (typeof showBots === "function") {
+            showBots();
         }
 
     } catch (error) {
 
         console.error("Initialization Error:", error);
 
-        const welcome = document.getElementById("welcome");
+        const app = document.getElementById("app");
 
-        if (welcome) {
-            welcome.textContent = "Failed to load OEDXBOT.";
+        if (app) {
+
+            app.innerHTML = `
+
+            <div class="page">
+
+                <h2>⚠️ OEDXBOT Error</h2>
+
+                <p>Failed to load OEDXBOT.</p>
+
+            </div>
+
+            `;
+
         }
 
     }
 
 }
 
-// Return to Home Screen
+// ------------------------------------------
+// Render Desktop Sidebar
+// ------------------------------------------
+
+function renderSidebarComponent() {
+
+    const sidebar = document.getElementById("sidebar");
+
+    if (!sidebar) return;
+
+    if (typeof renderSidebar === "function") {
+
+        sidebar.innerHTML = renderSidebar();
+
+    }
+
+}
+
+// ------------------------------------------
+// Refresh Sidebar
+// (Call this after future updates such as
+// chat history changes or login/logout.)
+// ------------------------------------------
+
+function refreshSidebar() {
+
+    renderSidebarComponent();
+
+}
+
+// ------------------------------------------
+// Return Home
+// ------------------------------------------
+
 function reloadHome() {
-    location.reload();
+
+    renderSidebarComponent();
+
+    if (typeof showBots === "function") {
+
+        showBots();
+
+    }
+
 }

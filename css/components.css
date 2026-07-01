@@ -1,35 +1,55 @@
 .card{
-    background:#1e293b;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:20px;
-    padding:24px;
-    cursor:pointer;
-    transition:all .25s ease;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+background:#1e293b;
+
+border:1px solid #334155;
+
+border-radius:18px;
+
+padding:20px;
+
+cursor:pointer;
+
+transition:.25s;
+
+display:flex;
+
+flex-direction:column;
+
+gap:14px;
+
 }
 
 .card:hover{
-    transform:translateY(-6px);
-    background:#243349;
-    border-color:#3b82f6;
-    box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+transform:translateY(-4px);
+
+border-color:#2563eb;
+
+box-shadow:0 10px 30px rgba(37,99,235,.25);
+
 }
 
 .card .icon{
-    font-size:42px;
-    margin-bottom:18px;
+
+font-size:40px;
+
 }
 
 .card h3{
-    font-size:28px;
-    margin-bottom:12px;
-    color:#fff;
+
+font-size:20px;
+
 }
 
 .card p{
-    color:#cbd5e1;
-    line-height:1.6;
-    font-size:16px;
+
+color:#cbd5e1;
+
+font-size:14px;
+
+line-height:1.5;
+
 }
 
 .card small{
@@ -37,4 +57,120 @@
     margin-top:18px;
     color:#60a5fa;
     font-weight:bold;
+}
+
+.bot-card{
+
+background:#1e293b;
+
+border:1px solid #334155;
+
+border-radius:18px;
+
+padding:22px;
+
+cursor:pointer;
+
+transition:.25s;
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+position:relative;
+
+}
+
+.bot-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#2563eb;
+
+box-shadow:0 10px 30px rgba(37,99,235,.25);
+
+}
+
+.bot-top{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.bot-icon{
+
+font-size:42px;
+
+}
+
+.bot-subtitle{
+
+color:#94a3b8;
+
+font-size:13px;
+
+margin-top:4px;
+
+}
+
+.bot-status{
+
+font-size:13px;
+
+color:#22c55e;
+
+font-weight:600;
+
+}
+
+.bot-tags{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+}
+
+.bot-tags span{
+
+background:#2563eb22;
+
+color:#60a5fa;
+
+padding:6px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+}
+
+.bot-desc{
+
+color:#cbd5e1;
+
+line-height:1.6;
+
+}
+
+.bot-arrow{
+
+position:absolute;
+
+right:20px;
+
+bottom:20px;
+
+font-size:22px;
+
+color:#3b82f6;
+
 }

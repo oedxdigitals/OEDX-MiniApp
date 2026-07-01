@@ -30,19 +30,7 @@ ${ai.name}
 
 </div>
 
-<div id="messages">
-
-<div class="ai">
-
-Hello 👋
-
-I'm your ${ai.name}.
-
-Ask me anything.
-
-</div>
-
-</div>
+<div id="messages"></div>
 
 <div class="chat-input">
 
@@ -69,6 +57,7 @@ Send
         .getElementById("send")
         .onclick = sendMessage;
 
+	loadChatHistory();
 }
 
 
@@ -78,32 +67,26 @@ Send
 
 function addUserMessage(text){
 
-    chatHistory.push({
-
-        role: "user",
-
-        content: text
-
-    });
-
-    const messages =
-        document.getElementById("messages");
+    const messages = document.getElementById("messages");
 
     messages.innerHTML += `
+        <div class="user">
+            ${text}
+        </div>
+    `;
 
-<div class="user">
+    const history = getCurrentChat();
 
-${text}
+    history.push({
+        role: "user",
+        content: text
+    });
 
-</div>
+    saveCurrentChat(history);
 
-`;
-
-    messages.scrollTop =
-        messages.scrollHeight;
+    messages.scrollTop = messages.scrollHeight;
 
 }
-
 
 /* ==========================
    AI Message
@@ -111,41 +94,81 @@ ${text}
 
 function addAIMessage(text){
 
-    chatHistory.push({
+    const messages = document.getElementById("messages");
 
-        role: "assistant",
+    messages.innerHTML += `
+        <div class="ai markdown-body">
+            ${marked.parse(text)}
+        </div>
+    `;
 
+    document.querySelectorAll("pre code").forEach((block)=>{
+        hljs.highlightElement(block);
+    });
+
+    const history = getCurrentChat();
+
+    history.push({
+        role: "ai",
         content: text
+    });
+
+    saveCurrentChat(history);
+
+    messages.scrollTop = messages.scrollHeight;
+
+}
+
+function loadChatHistory(){
+
+    const history = getCurrentChat();
+
+    if(history.length === 0){
+
+        addAIMessage(`Hello 👋
+
+I'm your ${currentAI.toUpperCase()} AI.
+
+Ask me anything.`);
+
+        return;
+
+    }
+
+    const messages = document.getElementById("messages");
+
+    messages.innerHTML = "";
+
+    history.forEach(msg=>{
+
+        if(msg.role==="user"){
+
+            messages.innerHTML += `
+                <div class="user">
+                    ${msg.content}
+                </div>
+            `;
+
+        }else{
+
+            messages.innerHTML += `
+                <div class="ai markdown-body">
+                    ${marked.parse(msg.content)}
+                </div>
+            `;
+
+        }
 
     });
 
-    const messages =
-        document.getElementById("messages");
+    document.querySelectorAll("pre code").forEach(block=>{
+        hljs.highlightElement(block);
+    });
 
-    messages.innerHTML += `
-
-<div class="ai markdown-body">
-
-${marked.parse(text)}
-
-</div>
-
-`;
-
-    document
-        .querySelectorAll("pre code")
-        .forEach((block)=>{
-
-            hljs.highlightElement(block);
-
-        });
-
-    addCopyButtons();
-
-    messages.scrollTop =
-        messages.scrollHeight;
+    messages.scrollTop = messages.scrollHeight;
 
 }
+
 
 function addCopyButtons(){
 

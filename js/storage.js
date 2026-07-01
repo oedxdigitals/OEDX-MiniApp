@@ -1,20 +1,51 @@
-const chats = {};
+const STORAGE_KEY = "oedxbot_chats";
 
-function getChat(ai) {
-    if (!chats[ai]) {
-        chats[ai] = [];
+function getChats(){
+
+    const data = localStorage.getItem(STORAGE_KEY);
+
+    if(!data){
+
+        return {};
+
     }
-    return chats[ai];
+
+    return JSON.parse(data);
+
 }
 
-function addMessage(ai, role, text) {
-    getChat(ai).push({
-        role,
-        text,
-        time: Date.now()
-    });
+function saveChats(chats){
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(chats)
+
+    );
+
 }
 
-function clearChat(ai) {
-    chats[ai] = [];
+function getCurrentChat(){
+
+    const chats = getChats();
+
+    if(!chats[currentAI]){
+
+        chats[currentAI] = [];
+
+    }
+
+    return chats[currentAI];
+
+}
+
+function saveCurrentChat(messages){
+
+    const chats = getChats();
+
+    chats[currentAI] = messages;
+
+    saveChats(chats);
+
 }
