@@ -248,3 +248,57 @@ opacity:1;
 }
 
 }
+
+/* ==========================
+   Copy Code Button
+========================== */
+
+pre{
+
+position:relative;
+
+overflow:auto;
+
+padding-top:45px;
+
+}
+
+.copy-btn{
+
+position:absolute;
+
+top:10px;
+
+right:10px;
+
+background:#2563eb;
+
+color:#fff;
+
+border:none;
+
+border-radius:8px;
+
+padding:6px 12px;
+
+font-size:12px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.copy-btn:hover{
+
+background:#1d4ed8;
+
+}
+
+.copy-btn:active{
+
+transform:scale(.96);
+
+}

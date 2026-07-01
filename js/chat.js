@@ -140,7 +140,45 @@ ${marked.parse(text)}
 
         });
 
+    addCopyButtons();
+
     messages.scrollTop =
         messages.scrollHeight;
+
+}
+
+function addCopyButtons(){
+
+    document.querySelectorAll("pre").forEach((pre)=>{
+
+        if(pre.querySelector(".copy-btn")) return;
+
+        const button = document.createElement("button");
+
+        button.className = "copy-btn";
+
+        button.textContent = "📋 Copy";
+
+        button.onclick = async ()=>{
+
+            const code = pre.querySelector("code").innerText;
+
+            await navigator.clipboard.writeText(code);
+
+            button.textContent = "✅ Copied";
+
+            setTimeout(()=>{
+
+                button.textContent = "📋 Copy";
+
+            },2000);
+
+        };
+
+        pre.style.position = "relative";
+
+        pre.appendChild(button);
+
+    });
 
 }
