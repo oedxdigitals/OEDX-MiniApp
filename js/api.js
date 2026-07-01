@@ -1,4 +1,5 @@
 const API_URL = "https://oedxbot-backend-production.up.railway.app/chat/";
+
 async function loadSpecialists() {
 
     const response = await fetch("data/specialists.json");
@@ -43,14 +44,23 @@ async function sendMessage() {
 
     const messages = document.getElementById("messages");
 
-	addUserMessage(text);
+    // Show user message and save to history
+    addUserMessage(text);
 
     input.value = "";
 
+    // Exclude the latest user message from history
+    const historyToSend = chatHistory.slice(0, -1);
+
+    // Thinking indicator
     const thinking = document.createElement("div");
+
     thinking.className = "ai";
+
     thinking.id = "thinking";
+
     thinking.innerHTML = "Thinking...";
+
     messages.appendChild(thinking);
 
     messages.scrollTop = messages.scrollHeight;
@@ -69,7 +79,9 @@ async function sendMessage() {
 
                 specialist: currentAI,
 
-                message: text
+                message: text,
+
+                history: historyToSend
 
             })
 
@@ -77,22 +89,23 @@ async function sendMessage() {
 
         const result = await response.json();
 
-	thinking.remove();
+        thinking.remove();
 
-	addAIMessage(result.reply);
+        if (result.success) {
 
-// Scroll to latest message
-	messages.scrollTop = messages.scrollHeight;
+            addAIMessage(result.reply);
+
+        } else {
+
+            addAIMessage("❌ " + (result.reply || "Unknown error."));
+
+        }
 
     } catch (error) {
 
         thinking.remove();
 
-        messages.innerHTML += `
-            <div class="ai">
-                ❌ Unable to reach OEDXBOT backend.
-            </div>
-        `;
+        addAIMessage("❌ Unable to reach OEDXBOT backend.");
 
         console.error(error);
 
