@@ -55,11 +55,21 @@ async function sendMessage() {
     // Thinking indicator
     const thinking = document.createElement("div");
 
-    thinking.className = "ai";
+    thinking.className = "ai thinking";
 
     thinking.id = "thinking";
 
-    thinking.innerHTML = "Thinking...";
+    thinking.innerHTML = `
+    <div class="typing">
+
+    <span></span>
+
+    <span></span>
+
+    <span></span>
+
+    </div>
+    `;
 
     messages.appendChild(thinking);
 
