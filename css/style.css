@@ -2,515 +2,288 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
     font-family:Arial,Helvetica,sans-serif;
+    background:#0f172a;
+    color:#fff;
 }
 
 body{
-    background:#0f172a;
-    color:#fff;
-    padding-bottom:120px;
-}
-
-#app{
-    max-width:700px;
-    margin:auto;
-    padding:20px;
-    padding-bottom:30px;
-}
-
-header{
-    text-align:center;
-    padding:25px 0;
-}
-
-header h1{
-    font-size:40px;
-    font-weight:800;
-    letter-spacing:2px;
-    margin-top:10px;
-    text-shadow:0 2px 10px rgba(0,0,0,.4);
-}
-
-.logo{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:12px;
-}
-
-.logo img{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    object-fit:cover;
-    box-shadow:0 4px 15px rgba(37,99,235,.35);
-}
-
-#welcome{
-    margin-top:10px;
-    color:#94a3b8;
-}
-
-.hero{
-    margin:30px 0;
-    padding:20px;
-    background:#1e293b;
-    border-radius:15px;
-}
-
-.hero p{
-    margin-top:10px;
-    color:#cbd5e1;
-}
-
-#cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
 }
 
 /* ===========================
-   OEDXBOT Sticky Footer
-=========================== */
-
-#footer{
-    position:fixed;
-    left:0;
-    bottom:0;
-    width:100%;
-    background:#111827;
-    border-top:1px solid #334155;
-    padding:8px 15px;
-    text-align:center;
-    z-index:1000;
-}
-
-.footer-brand{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    margin-bottom:4px;
-}
-
-.footer-logo img{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.footer-title{
-    font-size:16px;
-    font-weight:bold;
-    color:#fff;
-    letter-spacing:1px;
-}
-
-.footer-text{
-    font-size:12px;
-    color:#cbd5e1;
-    line-height:1.3;
-}
-
-.footer-text strong{
-    color:#3b82f6;
-}
-
-.footer-version{
-    margin-top:4px;
-    font-size:11px;
-    color:#64748b;
-}
-
-/* ===========================
-   OEDXBOT v3.0 Desktop Layout
+   APP LAYOUT
 =========================== */
 
 #layout{
     display:flex;
-    min-height:100vh;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
 }
+
+/* ===========================
+   SIDEBAR
+=========================== */
 
 #sidebar{
-    display:none;
-}
 
-/* Desktop View */
+    width:260px;
 
-@media (min-width:900px){
+    background:#111827;
 
-    body{
-        padding-bottom:0;
-    }
-
-    #layout{
-        display:flex;
-    }
-
-    #sidebar{
-
-        display:flex;
-        flex-direction:column;
-
-        width:280px;
-
-        background:#111827;
-
-        border-right:1px solid #334155;
-
-        padding:20px;
-
-        position:sticky;
-
-        top:0;
-
-        height:100vh;
-
-    }
-
-    #app{
-
-        flex:1;
-
-        max-width:none;
-
-        padding:30px;
-
-    }
-
-    #footer{
-
-        display:none;
-
-    }
-
-}
-
-/* Sidebar */
-
-.sidebar-top{
+    border-right:1px solid #1f2937;
 
     display:flex;
+
     flex-direction:column;
-    gap:20px;
+
+    padding:20px;
 
 }
 
-.sidebar-brand{
+.brand{
 
     display:flex;
+
     align-items:center;
+
     gap:12px;
 
+    margin-bottom:25px;
+
 }
 
-.sidebar-brand img{
+.brand img{
 
-    width:42px;
-    height:42px;
+    width:48px;
+
+    height:48px;
+
     border-radius:50%;
 
 }
 
-.sidebar-brand h2{
+.brand h2{
 
-    font-size:22px;
+    font-size:28px;
+
+    font-weight:800;
 
 }
 
-#newChatBtn{
+#newChat{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
 
     background:#2563eb;
-    color:#fff;
-    border:none;
-    border-radius:12px;
-    padding:12px;
+
+    color:white;
+
+    font-size:16px;
+
     cursor:pointer;
-    font-size:15px;
 
-}
+    margin-bottom:25px;
 
-#chatList{
-
-    flex:1;
-    margin-top:30px;
-    overflow:auto;
-
-}
-
-#chatList h4{
-
-    color:#94a3b8;
-    margin-bottom:15px;
-
-}
-
-.chat-item{
-
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:8px;
-    cursor:pointer;
     transition:.2s;
 
 }
 
-.chat-item:hover{
+#newChat:hover{
 
-    background:#1e293b;
-
-}
-
-.chat-item.active{
-
-    background:#2563eb;
+    background:#1d4ed8;
 
 }
 
-.sidebar-bottom{
-
-    border-top:1px solid #334155;
-    padding-top:20px;
-    color:#94a3b8;
-    font-size:13px;
-
-}
-
-/* Bottom Navigation */
-
-#bottomNav{
-
-    position:fixed;
-
-    bottom:0;
-
-    left:0;
-
-    width:100%;
+nav{
 
     display:flex;
 
-    justify-content:space-around;
+    flex-direction:column;
 
-    background:#111827;
-
-    border-top:1px solid #334155;
-
-    padding:8px 0;
-
-    z-index:999;
+    gap:10px;
 
 }
 
-#bottomNav button{
+nav button{
 
     background:none;
 
     border:none;
 
-    color:#fff;
+    color:#e2e8f0;
+
+    padding:14px;
+
+    text-align:left;
+
+    font-size:16px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+nav button:hover{
+
+    background:#1e293b;
+
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+#app{
+
+    flex:1;
+
+    height:100vh;
+
+    overflow-y:auto;
+
+    padding:30px;
+
+    background:#0f172a;
+
+}
+
+/* Scrollbar */
+
+#app::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+#app::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:20px;
+
+}
+
+/* ===========================
+   HOME
+=========================== */
+
+.home{
 
     display:flex;
 
     flex-direction:column;
 
+    gap:30px;
+
+}
+
+.home-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
     align-items:center;
 
-    gap:4px;
+}
+
+.home-top h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.home-top p{
+
+    color:#94a3b8;
+
+    margin-top:6px;
+
+}
+
+.home-actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.icon-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1e293b;
+
+    color:white;
+
+    font-size:22px;
 
     cursor:pointer;
 
-    font-size:13px;
+    transition:.2s;
 
 }
 
-#bottomNav span{
+.icon-btn:hover{
 
-    font-size:11px;
-
-}
-
-@media(min-width:900px){
-
-    #bottomNav{
-
-        display:none;
-
-    }
+    background:#2563eb;
 
 }
+
 
 /* ===========================
-   v3 Top Navigation
+   MOBILE
 =========================== */
 
-.topbar{
+@media(max-width:900px){
 
-display:flex;
+#layout{
 
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
+    display:block;
 
 }
 
-.topbar-left{
+#sidebar{
 
-display:flex;
-
-align-items:center;
-
-gap:12px;
+    display:none;
 
 }
 
-.top-logo{
+#app{
 
-width:42px;
+    width:100%;
 
-height:42px;
+    height:100vh;
 
-border-radius:50%;
-
-}
-
-.top-title{
-
-font-size:24px;
-
-font-weight:700;
+    padding:18px;
 
 }
-
-.topbar-right{
-
-display:flex;
-
-gap:10px;
-
-}
-
-.top-icon{
-
-width:42px;
-
-height:42px;
-
-border:none;
-
-border-radius:12px;
-
-background:#1e293b;
-
-color:#fff;
-
-cursor:pointer;
-
-font-size:18px;
-
-transition:.2s;
-
-}
-
-.top-icon:hover{
-
-background:#2563eb;
-
-}
-
-/* Search Modal */
-
-#searchModal{
-
-position:fixed;
-
-inset:0;
-
-background:rgba(0,0,0,.7);
-
-display:flex;
-
-justify-content:center;
-
-align-items:flex-start;
-
-padding-top:80px;
-
-z-index:9999;
-
-}
-
-.search-box{
-
-width:min(700px,92%);
-
-background:#111827;
-
-border-radius:16px;
-
-overflow:hidden;
-
-}
-
-.search-header{
-
-display:flex;
-
-padding:15px;
-
-gap:10px;
-
-}
-
-.search-header input{
-
-flex:1;
-
-background:#1e293b;
-
-border:none;
-
-color:white;
-
-padding:14px;
-
-border-radius:10px;
-
-font-size:15px;
-
-}
-
-.search-header button{
-
-border:none;
-
-background:#2563eb;
-
-color:white;
-
-padding:12px 16px;
-
-border-radius:10px;
-
-cursor:pointer;
-
-}
-
-.search-item{
-
-padding:16px;
-
-border-top:1px solid #334155;
-
-cursor:pointer;
-
-}
-
-.search-item:hover{
-
-background:#1e293b;
 
 }

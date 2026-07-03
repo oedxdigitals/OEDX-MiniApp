@@ -1,16 +1,69 @@
 let currentAI = null;
-let currentAIData = null;
-let chatHistory = [];
 
-async function openAI(id){
+/*
+==============================
+Open selected AI
+==============================
+*/
 
-    currentAI = id;
+function openAI(ai){
 
-    const response = await fetch("data/specialists.json");
-    const data = await response.json();
+    currentAI = ai;
 
-    currentAIData = data.find(ai => ai.id === id);
+    showChat(ai);
 
-    showChat(currentAIData);
+}
+
+/*
+==============================
+Home Screen
+==============================
+*/
+
+function reloadHome(){
+
+    currentAI = null;
+
+    const app = document.getElementById("app");
+
+    app.innerHTML = `
+
+<div class="home">
+
+    <div class="home-top">
+
+        <div>
+
+            <h1>Bots</h1>
+
+            <p>
+                Choose an AI specialist to begin chatting.
+            </p>
+
+        </div>
+
+        <div class="home-actions">
+
+            <button class="icon-btn">
+                🔍
+            </button>
+
+            <button class="icon-btn">
+                ＋
+            </button>
+
+        </div>
+
+    </div>
+
+    <section id="cards">
+
+    </section>
+
+</div>
+
+`;
+
+    loadSpecialists();
 
 }

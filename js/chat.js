@@ -1,49 +1,63 @@
-function showChat(ai){
+function showChat(ai) {
 
     const app = document.getElementById("app");
 
+    currentAI = ai.id;
+
     app.innerHTML = `
 
-<div class="chat-header">
+<div class="chat-page">
 
-<button id="backBtn" class="back-btn">
+    <div class="chat-header">
 
-←
+        <div class="chat-left">
 
-</button>
+            <button
+                id="backBtn"
+                class="back-btn">
 
-<div class="chat-title">
+                ←
 
-<span class="chat-icon">
+            </button>
 
-${ai.icon}
+            <div class="chat-title">
 
-</span>
+                <span>
 
-<span>
+                    ${ai.icon}
 
-${ai.name}
+                </span>
 
-</span>
+                <span>
 
-</div>
+                    ${ai.name}
 
-</div>
+                </span>
 
-<div id="messages"></div>
+            </div>
 
-<div class="chat-input">
+        </div>
 
-<input
-id="prompt"
-type="text"
-placeholder="Ask anything...">
+    </div>
 
-<button id="send">
+    <div id="messages">
 
-Send
+    </div>
 
-</button>
+    <div class="chat-input">
+
+        <input
+            id="prompt"
+            type="text"
+            placeholder="Ask anything...">
+
+        <button id="send">
+
+            Send
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -57,29 +71,44 @@ Send
         .getElementById("send")
         .onclick = sendMessage;
 
-	loadChatHistory();
+    document
+        .getElementById("prompt")
+        .addEventListener("keypress", function (e) {
+
+            if (e.key === "Enter") {
+
+                sendMessage();
+
+            }
+
+        });
+
+    loadChatHistory();
+
 }
 
-
-/* ==========================
-   User Message
-========================== */
-
-function addUserMessage(text){
+function addUserMessage(text) {
 
     const messages = document.getElementById("messages");
 
     messages.innerHTML += `
-        <div class="user">
-            ${text}
-        </div>
-    `;
+
+<div class="user">
+
+${text}
+
+</div>
+
+`;
 
     const history = getCurrentChat();
 
     history.push({
+
         role: "user",
+
         content: text
+
     });
 
     saveCurrentChat(history);
@@ -88,29 +117,36 @@ function addUserMessage(text){
 
 }
 
-/* ==========================
-   AI Message
-========================== */
-
-function addAIMessage(text){
+function addAIMessage(text) {
 
     const messages = document.getElementById("messages");
 
     messages.innerHTML += `
-        <div class="ai markdown-body">
-            ${marked.parse(text)}
-        </div>
-    `;
 
-    document.querySelectorAll("pre code").forEach((block)=>{
-        hljs.highlightElement(block);
-    });
+<div class="ai markdown-body">
+
+${marked.parse(text)}
+
+</div>
+
+`;
+
+    document
+        .querySelectorAll("pre code")
+        .forEach(block => {
+
+            hljs.highlightElement(block);
+
+        });
 
     const history = getCurrentChat();
 
     history.push({
+
         role: "ai",
+
         content: text
+
     });
 
     saveCurrentChat(history);
@@ -119,89 +155,72 @@ function addAIMessage(text){
 
 }
 
-function loadChatHistory(){
-
-    const history = getCurrentChat();
-
-    if(history.length === 0){
-
-        addAIMessage(`Hello 👋
-
-I'm your ${currentAI.toUpperCase()} AI.
-
-Ask me anything.`);
-
-        return;
-
-    }
+function loadChatHistory() {
 
     const messages = document.getElementById("messages");
 
     messages.innerHTML = "";
 
-    history.forEach(msg=>{
+    const history = getCurrentChat();
 
-        if(msg.role==="user"){
+    if (history.length === 0) {
+
+        messages.innerHTML = `
+
+<div class="ai">
+
+👋 Hello! I'm your <strong>${currentAI.toUpperCase()}</strong> AI.
+
+<br><br>
+
+How can I help you today?
+
+</div>
+
+`;
+
+        return;
+
+    }
+
+    history.forEach(msg => {
+
+        if (msg.role === "user") {
 
             messages.innerHTML += `
-                <div class="user">
-                    ${msg.content}
-                </div>
-            `;
 
-        }else{
+<div class="user">
+
+${msg.content}
+
+</div>
+
+`;
+
+        } else {
 
             messages.innerHTML += `
-                <div class="ai markdown-body">
-                    ${marked.parse(msg.content)}
-                </div>
-            `;
+
+<div class="ai markdown-body">
+
+${marked.parse(msg.content)}
+
+</div>
+
+`;
 
         }
 
     });
 
-    document.querySelectorAll("pre code").forEach(block=>{
-        hljs.highlightElement(block);
-    });
+    document
+        .querySelectorAll("pre code")
+        .forEach(block => {
+
+            hljs.highlightElement(block);
+
+        });
 
     messages.scrollTop = messages.scrollHeight;
-
-}
-
-
-function addCopyButtons(){
-
-    document.querySelectorAll("pre").forEach((pre)=>{
-
-        if(pre.querySelector(".copy-btn")) return;
-
-        const button = document.createElement("button");
-
-        button.className = "copy-btn";
-
-        button.textContent = "📋 Copy";
-
-        button.onclick = async ()=>{
-
-            const code = pre.querySelector("code").innerText;
-
-            await navigator.clipboard.writeText(code);
-
-            button.textContent = "✅ Copied";
-
-            setTimeout(()=>{
-
-                button.textContent = "📋 Copy";
-
-            },2000);
-
-        };
-
-        pre.style.position = "relative";
-
-        pre.appendChild(button);
-
-    });
 
 }
