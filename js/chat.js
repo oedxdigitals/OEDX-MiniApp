@@ -44,20 +44,44 @@ function showChat(ai) {
 
     </div>
 
-    <div class="chat-input">
+<div class="composer">
 
-        <input
-            id="prompt"
-            type="text"
-            placeholder="Ask anything...">
+    <textarea
 
-        <button id="send">
+        id="prompt"
 
-            Send
+        rows="1"
+
+        placeholder="Message OEDXBOT...">
+
+    </textarea>
+
+    <div class="composer-actions">
+
+        <button
+
+            id="attachBtn"
+
+            class="composer-icon"
+
+            title="Coming Soon">
+
+            📎
+
+        </button>
+
+        <button
+
+            id="send"
+
+            class="send-btn">
+
+            ➜
 
         </button>
 
     </div>
+</div>
 
 </div>
 
@@ -70,6 +94,10 @@ function showChat(ai) {
     document
         .getElementById("send")
         .onclick = sendMessage;
+
+const textarea=document.getElementById("prompt");
+
+textarea.addEventListener("input",autoResizeTextarea);
 
     document
         .getElementById("prompt")
@@ -86,6 +114,7 @@ function showChat(ai) {
     loadChatHistory();
 
 }
+
 
 function addUserMessage(text) {
 
@@ -123,13 +152,197 @@ function addAIMessage(text) {
 
     messages.innerHTML += `
 
-<div class="ai markdown-body">
+<div class="ai">
 
-${marked.parse(text)}
+    <div class="ai-header">
+
+        <img
+
+        src="assets/images/oedxbot-logo.png"
+
+        class="ai-logo"
+
+        alt="OEDXBOT">
+
+        <span>
+
+            OEDXBOT
+
+        </span>
+
+    </div>
+
+    <div class="markdown-body ai-content">
+
+        ${marked.parse(text)}
+
+    </div>
 
 </div>
 
 `;
+
+// ==========================================
+// Streaming Message Helpers
+// ==========================================
+
+function createStreamingMessage(){
+
+    const messages = document.getElementById("messages");
+
+    const container = document.createElement("div");
+
+    container.className = "ai";
+
+    container.innerHTML = `
+
+    <div class="ai-header">
+
+        <img
+        src="assets/images/oedxbot-logo.png"
+        class="ai-logo"
+        alt="OEDXBOT">
+
+        <span>
+
+            OEDXBOT
+
+        </span>
+
+    </div>
+
+    <div class="markdown-body ai-content">
+
+        <span class="stream-text"></span>
+
+        <span class="cursor">▌</span>
+
+    </div>
+
+    `;
+
+    messages.appendChild(container);
+
+    messages.scrollTop = messages.scrollHeight;
+
+    return container;
+
+}
+
+function updateStreamingMessage(container,text){
+
+    const stream = container.querySelector(".stream-text");
+
+    if(stream){
+
+        stream.innerHTML = marked.parse(text);
+
+    }
+
+    container.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"end"
+
+    });
+
+}
+
+function finishStreamingMessage(container){
+
+    const cursor = container.querySelector(".cursor");
+
+    if(cursor){
+
+        cursor.remove();
+
+    }
+
+    document
+    .querySelectorAll("pre code")
+    .forEach(block=>{
+
+        hljs.highlightElement(block);
+
+    });
+
+    enhanceCodeBlocks();
+
+}
+
+function enhanceCodeBlocks(){
+
+    document.querySelectorAll(".markdown-body pre").forEach(pre=>{
+
+        if(pre.parentElement.classList.contains("code-block")){
+
+            return;
+
+        }
+
+        const wrapper=document.createElement("div");
+
+        wrapper.className="code-block";
+
+        const header=document.createElement("div");
+
+        header.className="code-header";
+
+        const language=document.createElement("span");
+
+        const code=pre.querySelector("code");
+
+        let lang="Code";
+
+        if(code){
+
+            const match=[...code.classList]
+                .find(c=>c.startsWith("language-"));
+
+            if(match){
+
+                lang=match.replace("language-","");
+
+            }
+
+        }
+
+        language.textContent=lang;
+
+        const button=document.createElement("button");
+
+        button.className="copy-btn";
+
+        button.textContent="📋 Copy";
+
+        button.onclick=()=>{
+
+            navigator.clipboard.writeText(pre.innerText);
+
+            button.textContent="✅ Copied";
+
+            setTimeout(()=>{
+
+                button.textContent="📋 Copy";
+
+            },2000);
+
+        };
+
+        header.appendChild(language);
+
+        header.appendChild(button);
+
+        pre.parentNode.insertBefore(wrapper,pre);
+
+        wrapper.appendChild(header);
+
+        wrapper.appendChild(pre);
+
+    });
+
+}
 
     document
         .querySelectorAll("pre code")
@@ -138,6 +351,8 @@ ${marked.parse(text)}
             hljs.highlightElement(block);
 
         });
+
+	enhanceCodeBlocks();
 
     const history = getCurrentChat();
 
@@ -222,5 +437,17 @@ ${marked.parse(msg.content)}
         });
 
     messages.scrollTop = messages.scrollHeight;
+
+}
+
+function autoResizeTextarea(){
+
+    const textarea=document.getElementById("prompt");
+
+    if(!textarea) return;
+
+    textarea.style.height="auto";
+
+    textarea.style.height=textarea.scrollHeight+"px";
 
 }

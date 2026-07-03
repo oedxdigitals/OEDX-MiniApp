@@ -1,14 +1,13 @@
-// OEDXBOT v3.0
+// ==========================================
+// OEDXBOT v3.1
 // Main Application
 // ==========================================
 
-document.addEventListener("DOMContentLoaded", () => {
-    init();
-});
+document.addEventListener("DOMContentLoaded", init);
 
-// ------------------------------------------
-// Initialize App
-// ------------------------------------------
+// ==========================================
+// Initialize Application
+// ==========================================
 
 async function init() {
 
@@ -16,15 +15,26 @@ async function init() {
 
         // Initialize Telegram Mini App
         if (typeof initTelegram === "function") {
+
             initTelegram();
+
         }
 
-        // Render Desktop Sidebar
+        // Render Sidebar
         renderSidebarComponent();
 
-        // Open default page
+        // Load Recent Chats
+        if (typeof loadRecentChats === "function") {
+
+            loadRecentChats();
+
+        }
+
+        // Open Default Page
         if (typeof showBots === "function") {
+
             showBots();
+
         }
 
     } catch (error) {
@@ -37,7 +47,7 @@ async function init() {
 
             app.innerHTML = `
 
-            <div class="page">
+            <div class="page error-page">
 
                 <h2>⚠️ OEDXBOT Error</h2>
 
@@ -53,9 +63,9 @@ async function init() {
 
 }
 
-// ------------------------------------------
-// Render Desktop Sidebar
-// ------------------------------------------
+// ==========================================
+// Render Sidebar
+// ==========================================
 
 function renderSidebarComponent() {
 
@@ -71,25 +81,29 @@ function renderSidebarComponent() {
 
 }
 
-// ------------------------------------------
+// ==========================================
 // Refresh Sidebar
-// (Call this after future updates such as
-// chat history changes or login/logout.)
-// ------------------------------------------
+// ==========================================
 
 function refreshSidebar() {
 
     renderSidebarComponent();
 
+    if (typeof loadRecentChats === "function") {
+
+        loadRecentChats();
+
+    }
+
 }
 
-// ------------------------------------------
+// ==========================================
 // Return Home
-// ------------------------------------------
+// ==========================================
 
 function reloadHome() {
 
-    renderSidebarComponent();
+    refreshSidebar();
 
     if (typeof showBots === "function") {
 
@@ -98,3 +112,10 @@ function reloadHome() {
     }
 
 }
+
+// ==========================================
+// Global Functions
+// ==========================================
+
+window.reloadHome = reloadHome;
+window.refreshSidebar = refreshSidebar;

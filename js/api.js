@@ -1,79 +1,92 @@
+// ==========================================
+// OEDXBOT v3.1
+// API Service
+// ==========================================
+
 const API_URL = "https://oedxbot-backend-production.up.railway.app/chat/";
+
+// ==========================================
+// Load AI Specialists
+// ==========================================
 
 async function loadSpecialists() {
 
-    const response = await fetch("data/specialists.json");
+    try {
 
-    const data = await response.json();
+        const response = await fetch("data/specialists.json");
 
-    const cards = document.getElementById("cards");
+        const data = await response.json();
 
-    cards.innerHTML = "";
+        const cards = document.getElementById("cards");
 
-    data.forEach(ai => {
+        if (!cards) return;
 
-        cards.innerHTML += `
-        <div class="card" onclick="openAI('${ai.id}')">
+        cards.innerHTML = "";
 
-            <div class="icon">
-                ${ai.icon}
+        data.forEach(ai => {
+
+            cards.innerHTML += `
+
+            <div class="card" onclick="openAI('${ai.id}')">
+
+                <div class="icon">
+
+                    ${ai.icon}
+
+                </div>
+
+                <h3>
+
+                    ${ai.name}
+
+                </h3>
+
+                <p>
+
+                    ${ai.description}
+
+                </p>
+
             </div>
 
-            <h3>
-                ${ai.name}
-            </h3>
+            `;
 
-            <p>
-                ${ai.description}
-            </p>
+        });
 
-        </div>
-        `;
+    } catch (error) {
 
-    });
+        console.error("Failed to load specialists:", error);
+
+    }
 
 }
+
+// ==========================================
+// Send Message
+// ==========================================
 
 async function sendMessage() {
 
     const input = document.getElementById("prompt");
 
+    if (!input) return;
+
     const text = input.value.trim();
 
     if (!text) return;
 
-    const messages = document.getElementById("messages");
-
-    // Show user message and save to history
+    // Show user message
     addUserMessage(text);
 
+    // Clear composer
     input.value = "";
+    input.style.height = "auto";
 
-    // Exclude the latest user message from history
+    // Previous conversation only
     const historyToSend = chatHistory.slice(0, -1);
 
-    // Thinking indicator
-    const thinking = document.createElement("div");
-
-    thinking.className = "ai thinking";
-
-    thinking.id = "thinking";
-
-    thinking.innerHTML = `
-    <div class="typing">
-
-    <span></span>
-
-    <span></span>
-
-    <span></span>
-
-    </div>
-    `;
-
-    messages.appendChild(thinking);
-
-    messages.scrollTop = messages.scrollHeight;
+    // Create streaming container
+    const stream = createStreamingMessage();
 
     try {
 
@@ -82,7 +95,9 @@ async function sendMessage() {
             method: "POST",
 
             headers: {
+
                 "Content-Type": "application/json"
+
             },
 
             body: JSON.stringify({
@@ -99,43 +114,70 @@ async function sendMessage() {
 
         const result = await response.json();
 
-        thinking.remove();
-
         if (result.success) {
 
-            addAIMessage(result.reply);
+            updateStreamingMessage(
+
+                stream,
+
+                result.reply
+
+            );
 
         } else {
 
-            addAIMessage("❌ " + (result.reply || "Unknown error."));
+            updateStreamingMessage(
+
+                stream,
+
+                "❌ " + (result.reply || "Unknown error.")
+
+            );
 
         }
 
     } catch (error) {
 
-        thinking.remove();
-
-        addAIMessage("❌ Unable to reach OEDXBOT backend.");
-
         console.error(error);
+
+        updateStreamingMessage(
+
+            stream,
+
+            "❌ Unable to reach OEDXBOT backend."
+
+        );
 
     }
 
-    messages.scrollTop = messages.scrollHeight;
+    finishStreamingMessage(stream);
 
 }
 
-document.addEventListener("keypress", function(e) {
 
-    if (e.key === "Enter") {
+// ==========================================
+// Keyboard Shortcuts
+// ==========================================
 
-        const input = document.getElementById("prompt");
+document.addEventListener("keydown", function (e) {
 
-        if (document.activeElement === input) {
+    const input = document.getElementById("prompt");
 
-            sendMessage();
+    if (!input) return;
 
-        }
+    if (
+
+        e.key === "Enter" &&
+
+        !e.shiftKey &&
+
+        document.activeElement === input
+
+    ) {
+
+        e.preventDefault();
+
+        sendMessage();
 
     }
 

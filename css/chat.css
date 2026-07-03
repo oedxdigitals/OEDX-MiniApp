@@ -96,7 +96,7 @@
 
     flex-direction:column;
 
-    gap:18px;
+    gap:28px;
 
 }
 
@@ -154,62 +154,332 @@
 
 }
 
-/* ==========================
-   INPUT
-========================== */
+/* ===================================
+   AI COMPOSER
+=================================== */
 
-.chat-input{
+.composer{
 
-    display:flex;
-
-    gap:14px;
-
-    padding:18px 0;
-
-    border-top:1px solid #1e293b;
-
-}
-
-.chat-input input{
-
-    flex:1;
+    margin-top:15px;
 
     background:#1e293b;
 
-    color:white;
+    border:1px solid #334155;
 
-    border:none;
+    border-radius:18px;
 
-    border-radius:16px;
+    padding:12px;
 
-    padding:18px;
+    display:flex;
 
-    font-size:16px;
+    flex-direction:column;
 
-    outline:none;
+    gap:12px;
 
 }
 
-.chat-input button{
+.composer textarea{
 
-    width:110px;
+    width:100%;
+
+    resize:none;
+
+    background:none;
 
     border:none;
 
-    border-radius:16px;
+    outline:none;
+
+    color:white;
+
+    font-size:16px;
+
+    line-height:1.6;
+
+    min-height:28px;
+
+    max-height:180px;
+
+    overflow-y:auto;
+
+    font-family:inherit;
+
+}
+
+.composer textarea::placeholder{
+
+    color:#94a3b8;
+
+}
+
+.composer-actions{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.composer-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0f172a;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.send-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
 
     background:#2563eb;
 
     color:white;
 
-    font-size:16px;
-
     cursor:pointer;
+
+    font-size:20px;
+
+    transition:.2s;
 
 }
 
-.chat-input button:hover{
+.send-btn:hover{
 
     background:#1d4ed8;
+
+}
+
+/* ===================================
+   AI HEADER
+=================================== */
+
+.ai-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:12px;
+
+    font-weight:bold;
+
+}
+
+.ai-logo{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+}
+
+.ai-content{
+
+    padding-left:46px;
+
+}
+
+.markdown-body{
+
+    color:#e2e8f0;
+
+    line-height:1.8;
+
+}
+
+.markdown-body p{
+
+    margin-bottom:16px;
+
+}
+
+.markdown-body ul{
+
+    margin-left:22px;
+
+    margin-bottom:16px;
+
+}
+
+.markdown-body ol{
+
+    margin-left:22px;
+
+    margin-bottom:16px;
+
+}
+
+.markdown-body h1,
+
+.markdown-body h2,
+
+.markdown-body h3{
+
+    margin:20px 0 12px;
+
+}
+
+.markdown-body code{
+
+    background:#111827;
+
+    padding:3px 6px;
+
+    border-radius:6px;
+
+}
+
+.markdown-body pre{
+
+    background:#111827;
+
+    border:1px solid #334155;
+
+    border-radius:14px;
+
+    padding:16px;
+
+    overflow:auto;
+
+    margin:18px 0;
+
+}
+
+/* ===================================
+   CODE BLOCKS
+=================================== */
+
+.code-block{
+
+    margin:18px 0;
+
+    border:1px solid #334155;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:#111827;
+
+}
+
+.code-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 15px;
+
+    background:#1e293b;
+
+    border-bottom:1px solid #334155;
+
+    font-size:13px;
+
+    color:#cbd5e1;
+
+}
+
+.copy-btn{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+}
+
+.copy-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.code-block pre{
+
+    margin:0;
+
+    padding:18px;
+
+    overflow:auto;
+
+    background:#111827;
+
+}
+
+.code-block code{
+
+    font-family:
+
+    "JetBrains Mono",
+
+    "Fira Code",
+
+    Consolas,
+
+    monospace;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.cursor{
+
+    display:inline-block;
+
+    animation:blink 1s infinite;
+
+    font-weight:bold;
+
+    color:#3b82f6;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:0;
+
+    }
 
 }
