@@ -1,68 +1,34 @@
 // ==========================================
-// OEDXBOT v3.1
-// Main Application
+// OEDXBOT v4.0
+// Application Bootstrap
 // ==========================================
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", initApp);
 
-// ==========================================
-// Initialize Application
-// ==========================================
+function initApp() {
 
-async function init() {
+    console.log("🚀 Starting OEDXBOT...");
 
-    try {
+    // Telegram Mini App
+    if (typeof initTelegram === "function") {
+        initTelegram();
+    }
 
-        // Initialize Telegram Mini App
-        if (typeof initTelegram === "function") {
+    // Sidebar
+    if (typeof renderSidebar === "function") {
 
-            initTelegram();
+        const sidebar = document.getElementById("sidebar");
 
-        }
-
-        // Render Sidebar
-        renderSidebarComponent();
-
-        // Load Recent Chats
-        if (typeof loadRecentChats === "function") {
-
-            loadRecentChats();
-
-        }
-
-        // Open Default Page
-        if (typeof showBots === "function") {
-
-            showBots();
-
-        }
-
-    } catch (error) {
-
-        console.error("Initialization Error:", error);
-
-        const app = document.getElementById("app");
-
-        if (app) {
-
-            app.innerHTML = `
-
-            <div class="page error-page">
-
-                <h2>⚠️ OEDXBOT Error</h2>
-
-                <p>Failed to load OEDXBOT.</p>
-
-            </div>
-
-            `;
-
+        if (sidebar) {
+            sidebar.innerHTML = renderSidebar();
         }
 
     }
 
-}
+    // Home page
+    reloadHome();
 
+}
 // ==========================================
 // Render Sidebar
 // ==========================================

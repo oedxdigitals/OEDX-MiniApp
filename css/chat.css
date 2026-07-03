@@ -1,6 +1,6 @@
-/* ===================================
-   CHAT LAYOUT
-=================================== */
+/* ==========================================
+   CHAT PAGE
+========================================== */
 
 .chat-page{
 
@@ -8,7 +8,11 @@
 
     flex-direction:column;
 
-    height:100vh;
+    height:100%;
+
+    max-width:900px;
+
+    margin:0 auto;
 
 }
 
@@ -80,9 +84,9 @@
 
 }
 
-/* ==========================
+/* ==========================================
    MESSAGES
-========================== */
+========================================== */
 
 #messages{
 
@@ -90,19 +94,21 @@
 
     overflow-y:auto;
 
-    padding:30px 0;
-
     display:flex;
 
     flex-direction:column;
 
-    gap:28px;
+    gap:24px;
+
+    padding:30px 10px 140px;
+
+    scroll-behavior:smooth;
 
 }
 
 #messages::-webkit-scrollbar{
 
-    width:6px;
+    width:8px;
 
 }
 
@@ -120,17 +126,19 @@
 
     max-width:75%;
 
+    padding:16px 20px;
+
     background:#2563eb;
 
-    color:white;
+    color:#ffffff;
 
-    padding:16px 18px;
+    border-radius:22px 22px 6px 22px;
 
-    border-radius:18px 18px 6px 18px;
+    line-height:1.7;
 
-    line-height:1.6;
+    word-break:break-word;
 
-    word-wrap:break-word;
+    box-shadow:0 4px 16px rgba(37,99,235,.20);
 
 }
 
@@ -138,43 +146,47 @@
 
     align-self:flex-start;
 
-    max-width:85%;
+    width:100%;
 
-    background:#1e293b;
+    max-width:100%;
 
-    color:white;
+    padding:18px 22px;
 
-    padding:18px;
-
-    border-radius:18px 18px 18px 6px;
-
-    line-height:1.7;
-
-    overflow:auto;
-
-}
-
-/* ===================================
-   AI COMPOSER
-=================================== */
-
-.composer{
-
-    margin-top:15px;
+    border-radius:18px;
 
     background:#1e293b;
 
     border:1px solid #334155;
 
-    border-radius:18px;
+    line-height:1.8;
 
-    padding:12px;
+}
+
+/* ==========================================
+   COMPOSER
+========================================== */
+
+.composer{
+
+    position:sticky;
+
+    bottom:0;
+
+    margin-top:auto;
+
+    padding:14px;
+
+    background:#0f172a;
+
+    border-top:1px solid #1f2937;
+
+}
+
+.composer{
 
     display:flex;
 
     flex-direction:column;
-
-    gap:12px;
 
 }
 
@@ -184,25 +196,25 @@
 
     resize:none;
 
-    background:none;
-
     border:none;
 
     outline:none;
 
-    color:white;
+    background:#1e293b;
 
-    font-size:16px;
+    color:#ffffff;
 
-    line-height:1.6;
+    padding:16px;
 
-    min-height:28px;
+    border-radius:18px;
+
+    min-height:54px;
 
     max-height:180px;
 
-    overflow-y:auto;
+    font-size:15px;
 
-    font-family:inherit;
+    line-height:1.6;
 
 }
 
@@ -214,6 +226,8 @@
 
 .composer-actions{
 
+    margin-top:12px;
+
     display:flex;
 
     justify-content:space-between;
@@ -222,31 +236,11 @@
 
 }
 
-.composer-icon{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#0f172a;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-}
-
 .send-btn{
 
-    width:46px;
+    width:48px;
 
-    height:46px;
+    height:48px;
 
     border:none;
 
@@ -254,7 +248,7 @@
 
     background:#2563eb;
 
-    color:white;
+    color:#ffffff;
 
     cursor:pointer;
 
@@ -268,12 +262,13 @@
 
     background:#1d4ed8;
 
+    transform:scale(1.05);
+
 }
 
 /* ===================================
    AI HEADER
 =================================== */
-
 .ai-header{
 
     display:flex;
@@ -282,11 +277,14 @@
 
     gap:12px;
 
-    margin-bottom:12px;
+    margin-bottom:16px;
 
-    font-weight:bold;
+    font-weight:700;
+
+    color:#ffffff;
 
 }
+
 
 .ai-logo{
 
@@ -479,6 +477,81 @@
     50%{
 
         opacity:0;
+
+    }
+
+}
+
+/* ==========================================
+   CHAT ANIMATIONS
+========================================== */
+
+.user,
+.ai{
+
+    animation:messageAppear .25s ease;
+
+}
+
+@keyframes messageAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE CHAT
+========================================== */
+
+@media (max-width:768px){
+
+    .chat-page{
+
+        max-width:100%;
+
+    }
+
+    #messages{
+
+        padding:20px 0 120px;
+
+    }
+
+    .user{
+
+        max-width:90%;
+
+    }
+
+    .ai{
+
+        width:100%;
+
+    }
+
+    .composer{
+
+        padding:10px;
+
+    }
+
+    .composer textarea{
+
+        font-size:16px;
 
     }
 

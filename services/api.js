@@ -3,10 +3,17 @@
 // API Service
 // ==========================================
 
-const API_URL = "https://oedxbot-backend-production.up.railway.app/chat/";
+const API_URL =
+"https://oedxbot-backend-production.up.railway.app/chat/";
 
 // ==========================================
-// Load AI Specialists
+// AI Specialists
+// ==========================================
+
+let specialists = [];
+
+// ==========================================
+// Load Specialists
 // ==========================================
 
 async function loadSpecialists() {
@@ -15,7 +22,7 @@ async function loadSpecialists() {
 
         const response = await fetch("data/specialists.json");
 
-        const data = await response.json();
+        specialists = await response.json();
 
         const cards = document.getElementById("cards");
 
@@ -23,39 +30,43 @@ async function loadSpecialists() {
 
         cards.innerHTML = "";
 
-        data.forEach(ai => {
+        specialists.forEach(ai => {
 
-            cards.innerHTML += `
+            const card = document.createElement("div");
 
-            <div class="card" onclick="openAI('${ai.id}')">
+            card.className = "card";
 
-                <div class="icon">
+            card.innerHTML = `
 
-                    ${ai.icon}
+<div class="icon">
 
-                </div>
+${ai.icon}
 
-                <h3>
+</div>
 
-                    ${ai.name}
+<h3>
 
-                </h3>
+${ai.name}
 
-                <p>
+</h3>
 
-                    ${ai.description}
+<p>
 
-                </p>
+${ai.description}
 
-            </div>
+</p>
 
-            `;
+`;
+
+            card.onclick = () => openAI(ai);
+
+            cards.appendChild(card);
 
         });
 
     } catch (error) {
 
-        console.error("Failed to load specialists:", error);
+        console.error(error);
 
     }
 
@@ -75,17 +86,12 @@ async function sendMessage() {
 
     if (!text) return;
 
-    // Show user message
     addUserMessage(text);
 
-    // Clear composer
     input.value = "";
+
     input.style.height = "auto";
 
-    // Previous conversation only
-    const historyToSend = chatHistory.slice(0, -1);
-
-    // Create streaming container
     const stream = createStreamingMessage();
 
     try {
@@ -102,11 +108,9 @@ async function sendMessage() {
 
             body: JSON.stringify({
 
-                specialist: currentAI,
+                specialist: currentAI.id,
 
-                message: text,
-
-                history: historyToSend
+                message: text
 
             })
 
@@ -130,7 +134,9 @@ async function sendMessage() {
 
                 stream,
 
-                "❌ " + (result.reply || "Unknown error.")
+                result.reply ||
+
+                "Unknown Error"
 
             );
 
@@ -154,12 +160,11 @@ async function sendMessage() {
 
 }
 
-
 // ==========================================
-// Keyboard Shortcuts
+// Keyboard
 // ==========================================
 
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", e => {
 
     const input = document.getElementById("prompt");
 
@@ -167,11 +172,15 @@ document.addEventListener("keydown", function (e) {
 
     if (
 
+        document.activeElement !== input
+
+    ) return;
+
+    if (
+
         e.key === "Enter" &&
 
-        !e.shiftKey &&
-
-        document.activeElement === input
+        !e.shiftKey
 
     ) {
 
@@ -182,3 +191,6 @@ document.addEventListener("keydown", function (e) {
     }
 
 });
+
+window.sendMessage = sendMessage;
+window.loadSpecialists = loadSpecialists;

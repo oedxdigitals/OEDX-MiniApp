@@ -1,12 +1,14 @@
-function renderTopBar(title){
+function renderTopBar(title = "OEDXBOT") {
 
     return `
 
-<header class="topbar">
+<div class="topbar">
 
     <div class="topbar-left">
 
-        <img src="assets/logo.png" class="top-logo">
+        <img
+            src="assets/images/oedxbot-logo.png"
+            class="top-logo">
 
         <span class="top-title">
 
@@ -19,24 +21,25 @@ function renderTopBar(title){
     <div class="topbar-right">
 
 	<button
-
 	class="top-icon"
+	onclick="reloadHome()"
+	title="Home">
 
-	onclick="openSearch()">
-
-	🔍
+	🏠
 
 	</button>
 
-        <button class="top-icon">
+	<button
+	    class="top-icon"
+	    title="Search">
 
-            ＋
+	    🔍
 
-        </button>
+	</button>
 
     </div>
 
-</header>
+</div>
 
 `;
 

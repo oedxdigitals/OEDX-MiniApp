@@ -6,7 +6,7 @@ function renderSidebar(){
 
     <div class="sidebar-header">
 
-        <img src="assets/logo.png" class="sidebar-logo">
+	<img src="assets/images/oedxbot-logo.png" class="sidebar-logo">
 
         <h2>OEDXBOT</h2>
 
